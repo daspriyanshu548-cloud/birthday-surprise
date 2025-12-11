@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Birthday Surprise</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 50px;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #ff00ff; }
+      to { text-shadow: 0 0 20px #00ffff; }
+    }
+
+    .quote {
+      font-size: 1.5em;
+      margin: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease;
+    }
+
+    .quote.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .photos {
+      margin: 30px auto;
+      max-width: 600px;
+    }
+
+    .photos img {
+      width: 100%;
+      border-radius: 15px;
+      margin: 20px 0;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 1s ease;
+      cursor: pointer;
+    }
+
+    .photos img.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Popup modal */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: #222;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      text-align: center;
+      animation: pop 0.5s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .close {
+      margin-top: 15px;
+      cursor: pointer;
+      color: #ff00ff;
+      font-weight: bold;
+    }
+
+    /* Music button */
+    #musicBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #ff00ff;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    #musicBtn:hover {
+      background: #00ffff;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎂 Happy Birthday, Bestie! 🎂</h1>
+
+  <div class="quote">"May your day be filled with magic ✨"</div>
+  <div class="quote">"Every smile of yours lights up the world 💖"</div>
+  <div class="quote">"Here’s to endless laughter and memories 🎶"</div>
+
+  <div class="photos">
+    <!-- Replace with your own images -->
+    <img src="C:\Users\Priyanshu Das\OneDrive\Pictures\WhatsApp Image 2025-12-11 at 22.13.45_056bdd8c.jpg" alt="Memory 1">
+    <img src="C:\Users\Priyanshu Das\OneDrive\Pictures\WhatsApp Image 2025-12-11 at 22.13.45_ce2038ed.jpg" alt="Memory 2">
+    <img src="C:\Users\Priyanshu Das\OneDrive\Pictures\WhatsApp Image 2025-12-11 at 22.13.45_05c53210.jpg" alt="Memory 3">
+  </div>
+
+  <!-- Music -->
+  <audio id="bgMusic" src="C:\Users\Priyanshu Das\Music\WhatsApp Audio 2025-12-11 at 22.16.04_d2518ede.mp3" loop></audio>
+  <button id="musicBtn">▶ Play Music</button>
+
+  <!-- Modal -->
+  <div class="modal" id="surpriseModal">
+    <div class="modal-content">
+      <h2>🎉 Surprise! 🎉</h2>
+      <p>You are loved beyond words. This page is just a tiny reflection of how special you are 💕</p>
+      <div class="close" onclick="closeModal()">Close</div>
+    </div>
+  </div>
+
+  <script>
+    // Sequential reveal of quotes
+    const quotes = document.querySelectorAll('.quote');
+    quotes.forEach((q, i) => {
+      setTimeout(() => q.classList.add('show'), i * 2000);
+    });
+
+    // Sequential reveal of photos
+    const photos = document.querySelectorAll('.photos img');
+    photos.forEach((p, i) => {
+      setTimeout(() => p.classList.add('show'), (i+1) * 3000);
+      p.addEventListener('click', () => openModal());
+    });
+
+    // Modal functions
+    function openModal() {
+      document.getElementById('surpriseModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('surpriseModal').style.display = 'none';
+    }
+
+    // Music control
+    const music = document.getElementById('bgMusic');
+    const btn = document.getElementById('musicBtn');
+    btn.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        btn.textContent = "⏸ Pause Music";
+      } else {
+        music.pause();
+        btn.textContent = "▶ Play Music";
+      }
+    });
+  </script>
+</body>
+</html>
